@@ -8,3 +8,9 @@ Smart restaurant waiting list, built with AngularJS.
 ## License
 [MIT License](LICENSE)
 
+=======
+## Get Started
+```sh
+$ cd app
+$ python -m SimpleHTTPServer <optional port>
+```
