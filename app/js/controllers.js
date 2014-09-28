@@ -6,7 +6,8 @@ angular.module('myApp.controllers', [])
 	.controller('LandingPageController', [function() {
 
 	}])
-	.controller('WaitlistController', [function() {
-
+	.controller('WaitlistController', ['$scope', function($scope) {
+		$scope.parties = [];
+		$scope.party = {name: '', phone: '', size: ''};
 	}]);
   
