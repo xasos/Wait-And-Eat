@@ -10,9 +10,8 @@ angular.module('myApp', [
   'myApp.controllers'
 ]).
 config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+  $locationProvider.html5Mode(true);
   $routeProvider.when('/', {templateUrl: 'partials/landing_page.html', controller: 'LandingPageController'});
   $routeProvider.when('/waitlist', {templateUrl: 'partials/waitlist.html', controller: 'WaitlistController'});
   $routeProvider.otherwise({redirectTo: '/'});
-
-  $locationProvider.html5Mode(true);
 }]);
