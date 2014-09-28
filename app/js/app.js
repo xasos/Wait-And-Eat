@@ -7,7 +7,8 @@ angular.module('myApp', [
   'myApp.filters',
   'myApp.services',
   'myApp.directives',
-  'myApp.controllers'
+  'myApp.controllers',
+  'firebase'
 ]).
 // config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 //   $locationProvider.html5Mode(true);
