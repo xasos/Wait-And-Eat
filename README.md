@@ -1,7 +1,7 @@
 Wait-And-Eat
 ============
 
-Smart restaurant waiting list, built with AngularJS.
+Smart restaurant waiting list, built with AngularJS, Firebase, Twilio, and Zapier.
 
 **NOTICE**: Not complete, under active development.
 
