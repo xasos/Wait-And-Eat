@@ -24,7 +24,7 @@
 		</tr>
 	</thead>
 	<tr ng-repeat="party in parties | orderByPriority">
-		<td><input type="checkbox"></td>
+		<td><input ng-model="party.done" ng-change="parties.$save(party.$id)" type="checkbox"></td>
 		<td>
 			<div><strong>{{ party.name }}  ({{ party.size }} people)</strong></div>
 			<div>{{ party.phone }}</div>
