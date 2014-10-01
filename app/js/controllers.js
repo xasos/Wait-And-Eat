@@ -17,10 +17,15 @@ angular.module('myApp.controllers', [])
 			$scope.newParty = {name: '', phone: '', size: ''};
 		};
 
-		$scope.sendTextMessage = function(phoneNumber) {
+		$scope.sendTextMessage = function(party) {
 			var textMessageRef = new Firebase('https://waitand-eat.firebaseio.com/textMessages');
 			var textMessages = $firebase(textMessageRef);
-			textMessages.$add({phoneNumber: phoneNumber});
+			var newTextMessage = {
+				phoneNumber: party.phone,
+				size: party.size,
+				name: party.name
+			};
+			textMessages.$add(newTextMessage);
 		};
 		
 	}]);
