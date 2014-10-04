@@ -6,8 +6,8 @@ angular.module('myApp.controllers', [])
 	.controller('LandingPageController', [function() {
 
 	}])
-	.controller('WaitlistController', ['$scope', '$firebase', function($scope, $firebase) {
-		var partiesRef = new Firebase('https://waitand-eat.firebaseio.com/parties');
+	.controller('WaitlistController', ['$scope', '$firebase', 'FIREBASE_URL', function($scope, $firebase, FIREBASE_URL) {
+		var partiesRef = new Firebase(FIREBASE_URL + 'parties');
 
 		$scope.parties = $firebase(partiesRef);
 		$scope.newParty = {name: '', phone: '', size: '', done: false, notified: 'No'};
@@ -18,7 +18,7 @@ angular.module('myApp.controllers', [])
 		};
 
 		$scope.sendTextMessage = function(party) {
-			var textMessageRef = new Firebase('https://waitand-eat.firebaseio.com/textMessages');
+			var textMessageRef = new Firebase(FIREBASE_URL + 'textMessages');
 			var textMessages = $firebase(textMessageRef);
 			var newTextMessage = {
 				phoneNumber: party.phone,
@@ -33,25 +33,24 @@ angular.module('myApp.controllers', [])
 		};
 		
 	}])
-	.controller('AuthController', ['$scope', '$firebaseSimpleLogin', function($scope, $firebaseSimpleLogin) {
-		var authRef = new Firebase('https://waitand-eat.firebaseio.com/');
-		var auth = $firebaseSimpleLogin(authRef);
-
+	.controller('AuthController', ['$scope', 'authService', function($scope, authService) {
+		
+		// Object bound to inputs on the register and login pages.
 		$scope.user = {email: '', password: ''};
 
+		// Method to register a new user using the authService
 		$scope.register = function() {
-			auth.$createUser($scope.user.email, $scope.user.password)
-			.then(function(data) {
-				console.log(data);
-				auth.$login('password', $scope.user);
-			});
+			authService.register($scope.user);
 		};
 
+		// Method to log in a user using the authService
 		$scope.login = function() {
-			auth.$login('password', $scope.user)
-			.then(function(data) {
-				console.log(data);
-			});
+			authService.login($scope.user);
 		};
+
+		// Method to log out a user using the authService
+		$scope.logout = function() {
+			authService.logout();
+		}
 	}]);
   	
