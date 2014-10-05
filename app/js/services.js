@@ -19,7 +19,7 @@ angular.module('myApp.services', [])
 			saveParty: function(party, userId) {
 				users.$child(userId).$child('parties').$add(party);
 			},
-			getPartyByUserId: function(userId) {
+			getPartiesByUserId: function(userId) {
 				return users.$child(userId).$child('parties');
 			}
 		};
@@ -27,7 +27,7 @@ angular.module('myApp.services', [])
 		return partyServiceObject;
 })
 
-.factory('textMessageService', function(partyService, dataService) {
+.factory('textMessageService', function(dataService, partyService) {
 	var textMessages = dataService.$child('textMessages');
 
 	var textMessageServiceObject = {
@@ -39,7 +39,6 @@ angular.module('myApp.services', [])
 			};
 			textMessages.$add(newTextMessage);
 			party.notified = "Yes";
-			// $scope.parties.$save(party.$id)
 			partyService.parties.$save(party.$id);
 		}
 	};
@@ -75,11 +74,11 @@ angular.module('myApp.services', [])
 		}
 	};
 
-	$rootScope.$on("$firebaseSimpleLogin:login", function(e, user) {
+	$rootScope.$on('$firebaseSimpleLogin:login', function(e, user) {
 		$rootScope.currentUser = user;
 	});
 
-	$rootScope.$on("$firebaseSimpleLogin:logout", function() {
+	$rootScope.$on('$firebaseSimpleLogin:logout', function() {
 		$rootScope.currentUser = null;
 	});
 
