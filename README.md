@@ -9,7 +9,7 @@ $ cd app
 $ python -m SimpleHTTPServer <optional port>
 ```
 
-The application is also avaiable online [here](http://waitandeat.herokuapp.com/).
+The application is also available online [here](http://waitandeat.herokuapp.com/).
 
 ## License
 [MIT License](LICENSE)
