@@ -26,7 +26,7 @@ angular.module('myApp.controllers', [])
 
 		// Function to send a test message to the party
 		$scope.sendTextMessage = function(party) {
-			textMessageService.sendTextMessage(party);
+			textMessageService.sendTextMessage(party, $scope.currentUser.id);
 		};
 		
 	}])

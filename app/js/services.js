@@ -31,37 +31,40 @@ angular.module('myApp.services', [])
 	var textMessages = dataService.$child('textMessages');
 
 	var textMessageServiceObject = {
-		sendTextMessage: function(party) {
+		sendTextMessage: function(party, userId) {
 			var newTextMessage = {
 				phoneNumber: party.phone,
 				size: party.size,
 				name: party.name
 			};
 			textMessages.$add(newTextMessage);
-			party.notified = "Yes";
-			partyService.parties.$save(party.$id);
+			partyService.getPartiesByUserId(userId).$child(party.$id).$update({notified: 'Yes'});
 		}
 	};
 
 	return textMessageServiceObject;
 })
 
-.factory('authService', function($firebaseSimpleLogin, $location, $rootScope, FIREBASE_URL) {
+.factory('authService', function($firebaseSimpleLogin, $location, $rootScope, FIREBASE_URL, dataService) {
 	var authRef = new Firebase(FIREBASE_URL);
 	var auth = $firebaseSimpleLogin(authRef);
+	var emails = dataService.$child('emails');
 
 	var authServiceObject =  {
 		register: function(user) {
 			auth.$createUser(user.email, user.password)
 			.then(function(data) {
-				console.log(data);
-				authServiceObject.login(user);
+				console.log(data);				
+				authServiceObject.login(user, function() {
+					emails.$add({email: user.email});
+				});
 			});
 		},
-		login: function(user) {
+		login: function(user, optionalCallback) {
 			auth.$login('password', user)
 			.then(function(data) {
 				console.log(data);
+				optionalCallback();
 				$location.path('/waitlist');
 			});
 		},
