@@ -8,7 +8,7 @@ Smart restaurant waiting list, built with AngularJS, Firebase, and Zapier.
 $ cd app
 $ python -m SimpleHTTPServer <optional port>
 ```
-## Pushing to Firebase Hosting
+## Pushing to Firebase
 ```sh
 $ npm install -g firebase-tools
 $ firebase login
